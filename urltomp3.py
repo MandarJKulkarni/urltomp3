@@ -1,5 +1,4 @@
 import os
-
 import requests
 from gtts import gTTS
 from newspaper import Article
