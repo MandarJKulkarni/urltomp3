@@ -6,7 +6,7 @@ Simple example
  >>> urltomp3.getmp3('https://abcd.com/article1')
  >>> urltomp3.play(./article.mp3)
 ```
-If you just want the text, that can also be done.
+If you just want the text, that can be done via gettext:
 ```
 >>> article_text = urltomp3.gettext('https://abcd.com/article1')
 ```
