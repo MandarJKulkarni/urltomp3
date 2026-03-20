@@ -1,4 +1,3 @@
-newspaper3k
-requests
+trafilatura
 pygame
 gtts
