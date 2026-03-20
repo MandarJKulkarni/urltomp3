@@ -1,8 +1,6 @@
 import os
-import requests
 from gtts import gTTS
-from newspaper import Article
-# from newspaper import fulltext
+import trafilatura
 from pygame import mixer
 import logging
 
@@ -10,18 +8,15 @@ logger = logging.getLogger(__name__)
 
 def gettext(url):
     try:
-        article = Article(url)
-        article.download()
-        article.parse()
-        return article.text
+        downloaded = trafilatura.fetch_url(url)
+        if downloaded:
+            return trafilatura.extract(downloaded)
     except Exception as ex:
         logger.error("failed to get text from url: " + url + " error: " + ex.__str__())
+    return None
 
 def getmp3(input_url):
     url_text = gettext(input_url)
-
-    # html = requests.get(input_url).text
-    # text = fulltext(html)
 
     if url_text:
         mp3file = './/article.mp3'
