@@ -2,25 +2,26 @@ import os
 import requests
 from gtts import gTTS
 from newspaper import Article
-from newspaper import fulltext
+# from newspaper import fulltext
 from pygame import mixer
+import logging
 
+logger = logging.getLogger(__name__)
 
-def get_text_from_url(url):
+def gettext(url):
     try:
         article = Article(url)
         article.download()
         article.parse()
         return article.text
     except Exception as ex:
-        return ex.__str__()
+        logger.error("failed to get text from url: " + url + " error: " + ex.__str__())
 
+def getmp3(input_url):
+    url_text = gettext(input_url)
 
-def mp3_from_url(input_url):
-    url_text = get_text_from_url(input_url)
-
-    html = requests.get(input_url).text
-    text = fulltext(html)
+    # html = requests.get(input_url).text
+    # text = fulltext(html)
 
     if url_text:
         mp3file = './/article.mp3'
