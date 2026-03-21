@@ -1,5 +1,6 @@
 import os
-from gtts import gTTS
+import asyncio
+import edge_tts
 import trafilatura
 from pygame import mixer
 import logging
@@ -19,10 +20,11 @@ def getmp3(input_url):
     url_text = gettext(input_url)
 
     if url_text:
-        mp3file = './/article.mp3'
+        mp3file = './article.mp3'
         if os.path.exists(mp3file):
             os.remove(mp3file)
-        gTTS(url_text).save(mp3file)
+        communicate = edge_tts.Communicate(url_text, "en-US-AriaNeural")
+        asyncio.run(communicate.save(mp3file))
         return input_url
     return "Unable to extract the data from the page"
 
